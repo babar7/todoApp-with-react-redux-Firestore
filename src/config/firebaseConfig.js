@@ -11,4 +11,3 @@
 // firebase.initializeApp(config);
 
 export default config;
-// export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();

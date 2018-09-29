@@ -1,10 +1,9 @@
 import ActionTypes from '../constant/index.js';
 import history from "../../History";
-import * as firebase from 'firebase';
-
+import firebase from 'firebase';
 import config from '../../config/firebaseConfig'; 
-firebase.initializeApp(config);
 
+firebase.initializeApp(config);
 
 // Initialize Cloud Firestore through Firebase
 var db = firebase.firestore();
@@ -33,9 +32,7 @@ export default class AuthActions {
                 db.collection("users").doc(success.user.uid).set(userObj)
                 .then( () =>{
                     console.log("Document successfully written!");
-                
                     dispatch({ type : ActionTypes.WRITTEN_SUCCESS})
-
                     history.replace('/signin')
                 })
                 .catch( error => {
@@ -53,7 +50,6 @@ export default class AuthActions {
 
                 dispatch({ type : ActionTypes.SIGNUP_FAILURE, payload : error.message})
                 
-                // dispatch({ type : ActionTypes.ERRORMSG, payload : errorMessage})
                 
             });
             
@@ -72,7 +68,6 @@ export default class AuthActions {
                 }
                 dispatch({ type : ActionTypes.SIGNIN_SUCCESS, payload : currentUserObj})
                 localStorage.setItem("currentUserUid", success.user.uid)
-                // localStorage.setItem("currentUserData", JSON.stringify(currentUserObj))
             })
             .then( ()=>{
 
@@ -90,6 +85,13 @@ export default class AuthActions {
                 // ...
               });
 
+        }
+    }
+
+    static logOut(){
+        return dispatch => {
+            console.log("userWanttologOut");
+            localStorage.removeItem("currentUserUid");
         }
     }
     

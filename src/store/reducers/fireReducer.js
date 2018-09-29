@@ -32,15 +32,44 @@ export default function fireReducer (state = initialState, action)  {
             return ({
                 ...state,
                 isError: false,
+                isLoggedIn :true,
                 todo : action.payload
-
             })
         }
         case ActionTypes.ADD_TODO: {
             return {
-                ...state 
+                ...state,
+                isError : false,
+                todo : action.payload
             }
         }
+        case ActionTypes.EDIT_TODO:
+            let editArr = state.todo;
+            editArr[action.payload.id].isEdit=true;
+            return {
+                todo:editArr
+            }
+        case ActionTypes.EDIT_TODO_SUCCESS:
+            let editArry = state.todo;
+            editArry[action.payload.id].isEdit=false;
+            return {
+                todo:editArry
+            }
+
+        case ActionTypes.DELETE_SUCCESS: {
+            state.todo.splice(action.payload, 1);
+            return {
+                ...state,
+                isError : false,
+                todo : state.todo.concat()
+            }
+        }
+        case ActionTypes.CLOSE_EDIT:
+            let closeEditArr = state.todo;
+            closeEditArr[action.payload.id].isEdit=false;
+            return {
+                todo : closeEditArr
+            }
         default:
             return state
     }

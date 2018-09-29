@@ -5,22 +5,20 @@ import {
 } from 'react-router-dom';
 
 import history from '../History';
-// import {
-//   SignupComponent,
-//   DashBoard
-// } from './../components/index';
-
-import {
-  Signin,Signup,DashBoard
-} from './../container/index';
+import ButtonAppBar from '../components/AppBar';
+import Signin from '../containers/signin';
+import Signup from '../containers/signup';
+import TodoContainer from '../containers/todo';
+// import signup from '../containers/signup';
 
 const ParentApp = () => (
   <div>
     {/* App routing goes here!! */}
-    <Route exact path="/signup" component={Signup} />
+    <ButtonAppBar />
     <Route exact path="/" component={Signin} /> 
+    <Route exact path="/signup" component={Signup} />
     <Route exact path="/signin" component={Signin} /> 
-    <Route exact path="/dashboard" component={DashBoard} />
+    <Route exact path="/dashboard" component={TodoContainer} />
 
   </div>
 );
