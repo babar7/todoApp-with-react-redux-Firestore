@@ -31,6 +31,7 @@
 body {
   margin: 0;
   min-width: 250px;
+  background: linear-gradient(to bottom right, #D7BBEA, #65A8F1);
 }
 .main{
     background-color: #673ab7;
@@ -140,10 +141,14 @@ ul li:nth-child(odd) {
 }
 
 .input{
-  width: 50%;
+ 
   display: -webkit-inline-box;
+  margin-left: 40px;
 }
-.signupMainDiv{
-  width: 400px;
-  border: 1px solid black;
+.form-group {
+  margin-bottom: 1rem;
+  width: 68%;
+  background: white;
+  padding: 6%;
+  box-shadow: 2px 2px 1px grey;
 }

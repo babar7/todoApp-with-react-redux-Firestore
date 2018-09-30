@@ -34,7 +34,7 @@ function ButtonAppBar(props) {
           <Typography variant="title" color="inherit" className={classes.grow}>
             Todo List App
           </Typography>
-          {(localStorage.getItem("currentUserUid") == "")? 
+          {(localStorage.getItem("currentUserUid") === "")? 
           <div>
           <Button color="inherit" onClick={ () => { history.push('/signup')}}>Signup</Button>
           <Button color="inherit" onClick={ () => { history.push('/signin')}}>Signin</Button>

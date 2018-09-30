@@ -10,23 +10,16 @@ class TodoContainer extends React.Component {
             todo:"",
             allTodos:[],
             isEdit:false,
-            updatedTodo:""
+            updatedTodo:"",
+            snackbar : "none"
         }
-       this.props.viewTwo(this.props.authReducer.user.uid);
+       this.props.viewTwo();
 
     }
     componentDidMount(){
-    //    this.props.viewTwo();
-    console.log(this.props, "componentDidMount")
-    // setTimeout(()=>{
-    //    console.log(this.props.fireReducer, "componentDidMount")
-    //    this.setState({
-    //        allTodos : this.props.fireReducer.todo
-    //    })
-    //     }, 12000)
+        
     }
     componentWillReceiveProps(nextProps){
-            console.log(nextProps, "NextProps")
             if(nextProps.fireReducer.todo !== null){
                 this.setState({
                     allTodos : this.props.fireReducer.todo
@@ -37,7 +30,7 @@ class TodoContainer extends React.Component {
     }
 
     onChangeEvent(e){
-        this.setState({[e.target.name]:e.target.value})
+        this.setState({[e.target.name]:e.target.value, snackbar : "none"})
     }
 
     addItem(){
@@ -55,14 +48,12 @@ class TodoContainer extends React.Component {
         }
         else
         {
-            alert("Please write some value");
-            this.setState({todo:""})
+            this.setState({snackbar : "block"})
 
         }
 
     }
     deleteItem(key , ind){
-        console.log("key",key , ind)
         this.props.deleteBtn(key, ind)
         this.deleteSuccess()
     }
@@ -70,14 +61,12 @@ class TodoContainer extends React.Component {
         this.setState({allTodos : this.props.fireReducer.todo})
     }
     editItem(key){
-        console.log("edit KEy",key)
         this.props.editBtn(key);
+        this.setState({updatedTodo : ''});
     }
 
     saveEditbtn(id,index){
-        if(this.state.updatedTodo.trim() != ""){
-            console.log(this.state.updatedTodo)
-            console.log(id,index)
+        if(this.state.updatedTodo.trim() !== ""){
             let value ={
                 todo:this.state.updatedTodo.trim(),
                 isEdit:this.state.isEdit
@@ -87,7 +76,7 @@ class TodoContainer extends React.Component {
             this.props.viewTwo();
         }
         else{
-            alert("please write some value");
+            this.setState({snackbar : "block"})
         }
         
     }
@@ -109,7 +98,6 @@ class TodoContainer extends React.Component {
 }
 
 function mapStateToProps(state){
-    // console.log()
     return({
         authReducer : state.auth,
         fireReducer: state.fire
@@ -128,11 +116,3 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(TodoContainer);
-// export default connect(
-//     state =>(
-//         {
-//             todoState:state.fireReducer
-//         }
-//     ),
-//     {viewTodo,addTodo,deleteTodo,editTodo,saveEditTodo,closeEdit}
-// )(TodoContainer)
